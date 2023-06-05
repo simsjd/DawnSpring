@@ -1,0 +1,4 @@
+Start server: sudo busybox httpd -h /DawnSpring/
+Stop server: pkill busybox
+
+Access via url: 192.168.1.122/start.html
