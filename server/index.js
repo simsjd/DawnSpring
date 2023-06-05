@@ -9,7 +9,7 @@ const wss = new WebSocket.Server({ port: 3010 });
 const path = require("path");
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("index.html"));
+  res.sendFile(path.resolve("/website/home.html"));
 });
 
 app.use("/static", express.static("app"));

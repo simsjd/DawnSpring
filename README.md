@@ -24,5 +24,9 @@ Database
 ### node.js
 server language
 
+npm install
+npm run start
+sudo pkill node
+
 ### socket.io
 Possible replacement for httpd
