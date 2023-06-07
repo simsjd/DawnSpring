@@ -11,6 +11,9 @@ const path = require("path");
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("website/home.html"));
 });
+app.get("/game", (req, res) => {
+  res.sendFile(path.resolve("website/game.html"));
+});
 
 app.use("/static", express.static("app"));
 // setup

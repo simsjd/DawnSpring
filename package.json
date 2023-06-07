@@ -8,10 +8,9 @@
     "start": "node ./server/index.js"
   },
   "keywords": [
-    "game",
-    "socket"
+    "rpg"
   ],
-  "author": "tonis",
+  "author": "simsjd",
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
