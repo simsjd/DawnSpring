@@ -10,11 +10,9 @@ const Listener = new KeyListener();
 const el = document.getElementById("gameCanvas");
 el.addEventListener("touchstart", handleTouchStart);
 el.addEventListener("touchmove", handleTouchMove);
-var touchY
-var touchX
-var canvas = document.getElementById("gameCanvas");
-var playerWidth = 5;
-var playerHeight = 10;
+var touchY;
+var touchX;
+var moveMax = 2;
 let packetsArray = [];
 
 let rocketStats = null;
@@ -31,8 +29,10 @@ function handleTouchMove(e) {
     if (rocketStats) {
       interPolate();
     }
-    rocketStats.x += e.changedTouches[0].clientX - touchX ;
-    rocketStats.y += e.changedTouches[0].clientY - touchY;
+    var xChange = e.changedTouches[0].clientX - touchX;
+    var yChange = e.changedTouches[0].clientY - touchY;
+    rocketStats.x += (xChange > moveMax ? moveMax : xChange)
+    rocketStats.y += (yChange > moveMax ? moveMax : yChange)
     sendData();
     e.preventDefault();
   }
