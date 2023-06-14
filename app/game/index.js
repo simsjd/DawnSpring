@@ -19,13 +19,11 @@ let rocketStats = null;
 
 function touchHandler(e) {
   if (e.touches) {
-    playerX = e.touches[0].pageX - canvas.offsetLeft - playerWidth / 2;
-    playerY = e.touches[0].pageY - canvas.offsetTop - playerHeight / 2;
     if (rocketStats) {
       interPolate();
     }
-    rocketStats.x += playerX;
-    rocketStats.y += playerY;
+    rocketStats.x += e.touches[0].pageX - canvas.offsetLeft - playerWidth / 2;
+    rocketStats.y += e.touches[0].pageY - canvas.offsetTop - playerHeight / 2;
     sendData();
     e.preventDefault();
   }
