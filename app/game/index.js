@@ -2,7 +2,7 @@ import KeyListener from "./helpers/keylistener.js";
 import Socket from "./helpers/sockets.js";
 import { Rocket } from "./models/rocket.js";
 import { lerp } from "./helpers/math.js";
-//import { Button } from '@pixi/ui';
+import { Button } from '@pixi/ui';
 const socket = new Socket();
 const app = new PIXI.Application(window.innerWidth, window.innerHeight, { backgroundColor: 0x1099bb });
 const Listener = new KeyListener();
@@ -15,6 +15,8 @@ el.addEventListener("touchcancel", handleTouchStop);
 window.addEventListener("resize", function() {
 	app.renderer.resize(window.innerWidth, window.innerHeight);
 });
+const button = new Button(new Graphics().beginFill(0xFFFFFF).drawRoundRect(0, 0, 100, 50, 15));
+app.stage.appendChild(button);
 var touchY;
 var touchX;
 var xChange = 0;
