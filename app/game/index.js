@@ -10,9 +10,12 @@ const Listener = new KeyListener();
 const el = document.getElementById("gameCanvas");
 el.addEventListener("touchstart", handleTouchStart);
 el.addEventListener("touchmove", handleTouchMove);
+el.addEventListener("touchend", handleTouchStop);
+el.addEventListener("touchcancel", handleTouchStop);
 var touchY;
 var touchX;
-var moveMax = 2;
+var xChange = 0;
+var yChange = 0;
 let packetsArray = [];
 
 let rocketStats = null;
@@ -26,26 +29,15 @@ function handleTouchStart(e) {
 
 function handleTouchMove(e) {
   if (e.touches) {
-    if (rocketStats) {
-      interPolate();
-    }
-    var xChange = e.changedTouches[0].clientX - touchX;
-    var yChange = e.changedTouches[0].clientY - touchY;
-    rocketStats.x += (xChange > moveMax ? moveMax : xChange)
-    rocketStats.y += (yChange > moveMax ? moveMax : yChange)
-    sendData();
-    touchX = e.changedTouches[0].clientX;
-    touchY = e.changedTouches[0].clientY;
+    xChange = Math.sign(e.changedTouches[0].clientX - touchX);
+    yChange = Math.sign(e.changedTouches[0].clientY - touchY);
     e.preventDefault();
   }
 }
 
-function movePlayer(amount, axis) {
-  if (rocketStats) {
-    interPolate();
-  }
-  rocketStats[axis] += amount;
-  sendData();
+function handleTouchStop(e) {
+  xChange = 0;
+  yChange = 0;
 }
 
 function createPlayer(playerdata) {
@@ -131,6 +123,10 @@ app.ticker.add(delta => {
   if (rocketStats) {
     interPolate();
   }
+  rocketStats.x += 4*xChange;
+  rocketStats.y += 4*yChange;
+  sendData();
+  /* commenting out keyboard for now
   Listener.on("W", () => {
     rocketStats.y -= 4;
     sendData();
@@ -149,7 +145,7 @@ app.ticker.add(delta => {
   Listener.on("D", () => {
     rocketStats.x += 4;
     sendData();
-  });
+  });*/
 });
 
 document.getElementById("gameCanvas").appendChild(app.view);
