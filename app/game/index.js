@@ -8,8 +8,8 @@ const app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
 const Listener = new KeyListener();
 //https://developer.mozilla.org/en-US/docs/Games/Techniques/Control_mechanisms/Mobile_touch
 const el = document.getElementById("gameCanvas");
-el.addEventListener("touchstart", touchHandler);
-el.addEventListener("touchmove", touchHandler);
+el.addEventListener("touchstart", handleTouchStart);
+el.addEventListener("touchmove", handleTouchMove);
 var touchY
 var touchX
 var canvas = document.getElementById("gameCanvas");
@@ -19,15 +19,20 @@ let packetsArray = [];
 
 let rocketStats = null;
 
-function touchHandler(e) {
+function handleTouchStart(e) {
   if (e.touches) {
-    touchY = e.originalEvent.touches[0].clientY;
-    touchX = e.originalEvent.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+    touchX = e.touches[0].clientX;
+  }
+}
+
+function handleTouchMove(e) {
+  if (e.touches) {
     if (rocketStats) {
       interPolate();
     }
-    rocketStats.x += e.originalEvent.changedTouches[0].clientX - touchX;
-    rocketStats.y += e.originalEvent.changedTouches[0].clientY - touchY;
+    rocketStats.x += e.changedTouches[0].clientX - touchX ;
+    rocketStats.y += e.changedTouches[0].clientY - touchY;
     sendData();
     e.preventDefault();
   }
