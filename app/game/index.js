@@ -2,12 +2,40 @@ import KeyListener from "./helpers/keylistener.js";
 import Socket from "./helpers/sockets.js";
 import { Rocket } from "./models/rocket.js";
 import { lerp } from "./helpers/math.js";
+import { Button } from '@pixi/ui';
 const socket = new Socket();
 const app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
 const Listener = new KeyListener();
+//https://developer.mozilla.org/en-US/docs/Games/Techniques/Control_mechanisms/Mobile_touch
+const el = document.getElementById("gameCanvas");
+el.addEventListener("touchstart", touchHandler);
+el.addEventListener("touchmove", touchHandler);
+var canvas = document.getElementById("gameCanvas");
 let packetsArray = [];
 
 let rocketStats = null;
+
+function touchHandler(e) {
+  if (e.touches) {
+    playerX = e.touches[0].pageX - canvas.offsetLeft - playerWidth / 2;
+    playerY = e.touches[0].pageY - canvas.offsetTop - playerHeight / 2;
+    if (rocketStats) {
+      interPolate();
+    }
+    rocketStats.x += playerX;
+    rocketStats.y += playerY;
+    sendData();
+    e.preventDefault();
+  }
+}
+
+function movePlayer(amount, axis) {
+  if (rocketStats) {
+    interPolate();
+  }
+  rocketStats[axis] += amount;
+  sendData();
+}
 
 function createPlayer(playerdata) {
   const rocket = new Rocket(playerdata);
@@ -47,6 +75,7 @@ function interPolate() {
     packetsArray.slice();
   }
 }
+
 function editPlayerPosition(player, cords) {
   const playerSprite = getCurrentPlayerSprite(player.id);
   if (!playerSprite) {
