@@ -123,9 +123,11 @@ app.ticker.add(delta => {
   if (rocketStats) {
     interPolate();
   }
-  rocketStats.x += 4*xChange;
-  rocketStats.y += 4*yChange;
-  sendData();
+  if (xChange != 0 || yChange != 0) {
+    rocketStats.x += 4*xChange;
+    rocketStats.y += 4*yChange;
+    sendData();
+  }
   /* commenting out keyboard for now
   Listener.on("W", () => {
     rocketStats.y -= 4;
