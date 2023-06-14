@@ -19,8 +19,8 @@ let rocketStats = null;
 
 function handleTouchStart(e) {
   if (e.touches) {
-    touchY = e.touches[0].clientY;
     touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
   }
 }
 
@@ -34,6 +34,8 @@ function handleTouchMove(e) {
     rocketStats.x += (xChange > moveMax ? moveMax : xChange)
     rocketStats.y += (yChange > moveMax ? moveMax : yChange)
     sendData();
+    touchX = e.changedTouches[0].clientX;
+    touchY = e.changedTouches[0].clientY;
     e.preventDefault();
   }
 }
