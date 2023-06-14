@@ -4,7 +4,7 @@ import { Rocket } from "./models/rocket.js";
 import { lerp } from "./helpers/math.js";
 //import { Button } from '@pixi/ui';
 const socket = new Socket();
-const app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+const app = new PIXI.Application(window.innerWidth, window.innerHeight, { backgroundColor: 0x1099bb });
 const Listener = new KeyListener();
 //https://developer.mozilla.org/en-US/docs/Games/Techniques/Control_mechanisms/Mobile_touch
 const el = document.getElementById("gameCanvas");
@@ -12,6 +12,9 @@ el.addEventListener("touchstart", handleTouchStart);
 el.addEventListener("touchmove", handleTouchMove);
 el.addEventListener("touchend", handleTouchStop);
 el.addEventListener("touchcancel", handleTouchStop);
+window.addEventListener("resize", function() {
+	app.renderer.resize(window.innerWidth, window.innerHeight);
+});
 var touchY;
 var touchX;
 var xChange = 0;

@@ -13,6 +13,7 @@
   "author": "simsjd",
   "license": "ISC",
   "dependencies": {
+    "@pixi/ui": "^0.7.2",
     "express": "^4.15.3",
     "ws": "^3.0.0"
   }
