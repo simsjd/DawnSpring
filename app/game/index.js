@@ -2,7 +2,7 @@ import KeyListener from "./helpers/keylistener.js";
 import Socket from "./helpers/sockets.js";
 import { Rocket } from "./models/rocket.js";
 import { lerp } from "./helpers/math.js";
-import { Button } from '@pixi/ui';
+//import { Button } from '@pixi/ui';
 const socket = new Socket();
 const app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
 const Listener = new KeyListener();
@@ -11,6 +11,8 @@ const el = document.getElementById("gameCanvas");
 el.addEventListener("touchstart", touchHandler);
 el.addEventListener("touchmove", touchHandler);
 var canvas = document.getElementById("gameCanvas");
+var playerWidth = 5;
+var playerHeight = 10;
 let packetsArray = [];
 
 let rocketStats = null;
