@@ -143,4 +143,4 @@ app.ticker.add(delta => {
   });
 });
 
-document.getElementById("game").appendChild(app.view);
+document.getElementById("gameCanvas").appendChild(app.view);
