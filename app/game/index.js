@@ -15,8 +15,8 @@ el.addEventListener("touchcancel", handleTouchStop);
 window.addEventListener("resize", function() {
 	app.renderer.resize(window.innerWidth, window.innerHeight);
 });
-const button = new Button(new Graphics().beginFill(0xFFFFFF).drawRoundRect(0, 0, 100, 50, 15));
-app.stage.appendChild(button);
+//const button = new Button(new Graphics().beginFill(0xFFFFFF).drawRoundRect(0, 0, 100, 50, 15));
+//app.stage.appendChild(button);
 var touchY;
 var touchX;
 var xChange = 0;

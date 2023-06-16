@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "startdev": "nodemon ./server/index.js",
-    "start": "node ./server/index.js"
+    "start": "node ./server/index.js",
+    "startlog":"node ./server/index.js > logs/node-$( date '+%Y-%m-%d_%H-%M-%s' ).log 2>&1"
   },
   "keywords": [
     "rpg"
@@ -15,6 +16,7 @@
   "dependencies": {
     "@pixi/ui": "^0.7.2",
     "express": "^4.15.3",
+    "nodemon": "^2.0.22",
     "ws": "^3.0.0"
   }
 }
